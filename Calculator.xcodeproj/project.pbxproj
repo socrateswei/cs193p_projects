@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		E488F4E21C57D1BA00CC6FE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E488F4E11C57D1BA00CC6FE7 /* AppDelegate.swift */; };
-		E488F4E41C57D1BA00CC6FE7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E488F4E31C57D1BA00CC6FE7 /* ViewController.swift */; };
 		E488F4E71C57D1BA00CC6FE7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E488F4E51C57D1BA00CC6FE7 /* Main.storyboard */; };
 		E488F4E91C57D1BA00CC6FE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E488F4E81C57D1BA00CC6FE7 /* Assets.xcassets */; };
 		E488F4EC1C57D1BA00CC6FE7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E488F4EA1C57D1BA00CC6FE7 /* LaunchScreen.storyboard */; };
 		E488F4F71C57D1BA00CC6FE7 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E488F4F61C57D1BA00CC6FE7 /* CalculatorTests.swift */; };
 		E488F5021C57D1BA00CC6FE7 /* CalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E488F5011C57D1BA00CC6FE7 /* CalculatorUITests.swift */; };
+		E488F5101C57D47F00CC6FE7 /* calculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E488F50F1C57D47F00CC6FE7 /* calculatorViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +36,6 @@
 /* Begin PBXFileReference section */
 		E488F4DE1C57D1BA00CC6FE7 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E488F4E11C57D1BA00CC6FE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E488F4E31C57D1BA00CC6FE7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E488F4E61C57D1BA00CC6FE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E488F4E81C57D1BA00CC6FE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E488F4EB1C57D1BA00CC6FE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +46,7 @@
 		E488F4FD1C57D1BA00CC6FE7 /* CalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E488F5011C57D1BA00CC6FE7 /* CalculatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorUITests.swift; sourceTree = "<group>"; };
 		E488F5031C57D1BA00CC6FE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E488F50F1C57D47F00CC6FE7 /* calculatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = calculatorViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,11 +98,11 @@
 			isa = PBXGroup;
 			children = (
 				E488F4E11C57D1BA00CC6FE7 /* AppDelegate.swift */,
-				E488F4E31C57D1BA00CC6FE7 /* ViewController.swift */,
 				E488F4E51C57D1BA00CC6FE7 /* Main.storyboard */,
 				E488F4E81C57D1BA00CC6FE7 /* Assets.xcassets */,
 				E488F4EA1C57D1BA00CC6FE7 /* LaunchScreen.storyboard */,
 				E488F4ED1C57D1BA00CC6FE7 /* Info.plist */,
+				E488F50F1C57D47F00CC6FE7 /* calculatorViewController.swift */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -259,7 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E488F4E41C57D1BA00CC6FE7 /* ViewController.swift in Sources */,
+				E488F5101C57D47F00CC6FE7 /* calculatorViewController.swift in Sources */,
 				E488F4E21C57D1BA00CC6FE7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
