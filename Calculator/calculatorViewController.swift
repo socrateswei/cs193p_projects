@@ -25,6 +25,14 @@ class calculatorViewController: UIViewController {
             firstTimeInput = false
         }
     }
+    
+    @IBAction func appendDot(sender: UIButton) {
+        if (!display.text!.containsString("."))
+        {
+            display.text = display.text! + "."
+            firstTimeInput = false
+        }
+    }
     @IBAction func operate(sender: UIButton) {
         let operation = sender.currentTitle!
         if !firstTimeInput {
