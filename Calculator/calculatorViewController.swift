@@ -25,6 +25,66 @@ class calculatorViewController: UIViewController {
             firstTimeInput = false
         }
     }
+    @IBAction func operate(sender: UIButton) {
+        let operation = sender.currentTitle!
+        if !firstTimeInput {
+            enter()
+        }
+        switch operation {
+
+            case "×":
+                if operandStack.count >= 2
+                {
+                    displayValue = operandStack.removeLast() * operandStack.removeLast()
+                    enter()
+                }
+            case "+":
+                if operandStack.count >= 2
+                {
+                    displayValue = operandStack.removeLast() + operandStack.removeLast()
+                    enter()
+            }
+            case "−":
+                if operandStack.count >= 2
+                {
+                    displayValue = operandStack.removeLast() - operandStack.removeLast()
+                    enter()
+            }
+            case "÷":
+                if operandStack.count >= 2
+                {
+                    displayValue = operandStack.removeLast() / operandStack.removeLast()
+                    enter()
+            }
+        default: break
+            
+        }
+    }
+    
+    @IBAction func clear() {
+        firstTimeInput = true
+        operandStack.removeAll()
+        display.text = "0"
+    }
+    
+    var operandStack: Array<Double> = []
+    
+    @IBAction func enter() {
+        firstTimeInput = true
+        operandStack.append(displayValue)
+        print("operandStack = \(operandStack)")
+    }
+    
+    var displayValue: Double{
+        get {
+            return NSNumberFormatter().numberFromString(display.text!)!.doubleValue
+        }
+        set {
+            display.text = "\(newValue)"
+            firstTimeInput = false
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
