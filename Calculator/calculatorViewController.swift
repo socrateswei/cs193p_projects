@@ -12,6 +12,8 @@ class calculatorViewController: UIViewController {
     @IBOutlet weak var display: UILabel!
     var firstTimeInput: Bool = true
     @IBOutlet weak var showHistory: UITextView!
+    var brain = CalculatorBrain()
+    
     
     @IBAction func appendDigit(sender: UIButton)
     {
@@ -49,15 +51,10 @@ class calculatorViewController: UIViewController {
         if !firstTimeInput {
             enter()
         }
-        switch operation {
-        case "×": performOperation() {$0*$1}
-        case "−": performOperation() {$1-$0}
-        case "÷": performOperation() {$1 / $0}
-        case "√": performOperation() {sqrt($0)}
-        case "sin": performOperation() {sin($0*M_PI/180)}
-        case "cos": performOperation() {cos($0*M_PI/180)}
-        default: break
-            
+        if let result = brain.performOperation(operation) {
+            displayValue = result
+        } else {
+            displayValue = 0
         }
         showHistory.text = showHistory.text! + " " + operation + " = " + display.text! + "\n"
     }
@@ -78,29 +75,6 @@ class calculatorViewController: UIViewController {
             display.text = String(display.text!.characters.dropLast())
         }
     }
-    
-    func performOperation(operation: (Double, Double) -> Double)
-    {
-        if operandStack.count >= 2
-        {
-            showHistory.text = showHistory.text! + String(operandStack[operandStack.count-2]) + " "
-            showHistory.text = showHistory.text! + String(operandStack[operandStack.count-1])
-            displayValue = operation(operandStack.removeLast(), operandStack.removeLast())
-            enter()
-        }
-    }
-
-    // Add private prefix is a fix for overloading error since Swift 1.2
-    // Ref: http://stackoverflow.com/questions/29457720/compiler-error-method-with-objective-c-selector-conflicts-with-previous-declara
-    private func performOperation(operation: Double -> Double)
-    {
-        if operandStack.count >= 1
-        {
-            showHistory.text = showHistory.text! + String(operandStack[operandStack.count-1])
-            displayValue = operation(operandStack.removeLast())
-            enter()
-        }
-    }
 
     
     @IBAction func clear() {
@@ -112,9 +86,12 @@ class calculatorViewController: UIViewController {
     var operandStack: Array<Double> = []
     
     @IBAction func enter() {
+        if let result = brain.pushOperand(displayValue) {
+            displayValue = result
+        } else {
+            displayValue = 0
+        }
         firstTimeInput = true
-        operandStack.append(displayValue)
-        print("operandStack = \(operandStack)")
     }
     
     var displayValue: Double{
