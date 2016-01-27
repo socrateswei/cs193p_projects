@@ -56,7 +56,7 @@ class calculatorViewController: UIViewController {
         } else {
             displayValue = nil
         }
-        showHistory.text = showHistory.text! + " " + operation + " = " + display.text! + "\n"
+        showHistory.text = showHistory.text! + brain.getHistory()! + "=" + String(displayValue!) + "\n"
     }
     
     @IBAction func reverseSign(sender: UIButton) {

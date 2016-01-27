@@ -41,7 +41,8 @@ class CalculatorBrain {
         learnOp(Op.BinaryOperation("−") {$1-$0})
         learnOp(Op.BinaryOperation("÷") {$1/$0})
         learnOp(Op.UnaryOperation("√", sqrt))
-
+        learnOp(Op.UnaryOperation("sin") {sin($0*M_PI/180)})
+        learnOp(Op.UnaryOperation("cos") {cos($0*M_PI/180)})
     }
     
     private func evaluate(ops: [Op]) -> (result: Double?, remainOps: [Op]) {
@@ -88,5 +89,20 @@ class CalculatorBrain {
     
     func clean() {
         opStack.removeAll()
+    }
+    
+    func getHistory() -> String? {
+        let count = opStack.count
+        let op = opStack[count-1]
+        switch op {
+        case .BinaryOperation(let symbol,_):
+            let history = opStack[count-2].description + " " + opStack[count-3].description + symbol + " = "
+            return history
+        case .UnaryOperation(let symbol,_):
+            let history = opStack[count-2].description + symbol + " = "
+            return history
+        default:
+            return nil
+        }
     }
 }
