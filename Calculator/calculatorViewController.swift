@@ -54,7 +54,7 @@ class calculatorViewController: UIViewController {
         if let result = brain.performOperation(operation) {
             displayValue = result
         } else {
-            displayValue = 0
+            displayValue = nil
         }
         showHistory.text = showHistory.text! + " " + operation + " = " + display.text! + "\n"
     }
@@ -86,20 +86,28 @@ class calculatorViewController: UIViewController {
     var operandStack: Array<Double> = []
     
     @IBAction func enter() {
-        if let result = brain.pushOperand(displayValue) {
+        if let result = brain.pushOperand(displayValue!) {
             displayValue = result
         } else {
-            displayValue = 0
+            displayValue = nil
         }
         firstTimeInput = true
     }
     
-    var displayValue: Double{
+    var displayValue: Double? {
         get {
-            return NSNumberFormatter().numberFromString(display.text!)!.doubleValue
+            if let value = display.text {
+                return Double(value)
+            } else {
+                return 0
+            }
         }
         set {
-            display.text = "\(newValue)"
+            if let value = newValue {
+                display.text = "\(value)"
+            } else {
+                display.text = String("0")
+            }
             firstTimeInput = false
         }
     }
