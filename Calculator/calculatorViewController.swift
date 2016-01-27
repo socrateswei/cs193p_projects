@@ -79,6 +79,7 @@ class calculatorViewController: UIViewController {
     
     @IBAction func clear() {
         firstTimeInput = true
+        brain.clean()
         display.text = "0"
     }
     
