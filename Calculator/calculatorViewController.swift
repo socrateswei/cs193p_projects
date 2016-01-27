@@ -79,11 +79,8 @@ class calculatorViewController: UIViewController {
     
     @IBAction func clear() {
         firstTimeInput = true
-        operandStack.removeAll()
         display.text = "0"
     }
-    
-    var operandStack: Array<Double> = []
     
     @IBAction func enter() {
         if let result = brain.pushOperand(displayValue!) {
