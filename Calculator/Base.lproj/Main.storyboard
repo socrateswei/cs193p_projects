@@ -213,6 +213,12 @@
                                     <action selector="removeLastDigit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="itC-JO-cN4"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Syq-d4-OLX">
+                                <rect key="frame" x="20" y="507" width="560" height="73"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -247,12 +253,14 @@
                             <constraint firstItem="pA4-Dd-5ue" firstAttribute="top" secondItem="Ev6-6E-W7s" secondAttribute="bottom" constant="8" id="IyQ-WU-1Gh"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="V2p-Ae-xq6" secondAttribute="bottom" constant="101" id="JS1-cK-00j"/>
                             <constraint firstItem="yUf-WY-5PI" firstAttribute="width" secondItem="pA4-Dd-5ue" secondAttribute="width" id="KEc-lU-ePY"/>
+                            <constraint firstItem="Syq-d4-OLX" firstAttribute="top" secondItem="wIq-Yv-7dW" secondAttribute="bottom" constant="8" symbolic="YES" id="KHL-mF-HWT"/>
                             <constraint firstItem="OTr-fO-Vj5" firstAttribute="leading" secondItem="RVb-BE-9k7" secondAttribute="trailing" constant="8" id="Kar-H0-9kc"/>
                             <constraint firstItem="Ev6-6E-W7s" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="LaC-dO-UmI"/>
                             <constraint firstItem="Ev6-6E-W7s" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="N86-sK-B1W"/>
                             <constraint firstItem="TVo-pF-FVE" firstAttribute="height" secondItem="pA4-Dd-5ue" secondAttribute="height" id="NfB-M2-jyP"/>
                             <constraint firstItem="gVw-Rf-08f" firstAttribute="height" secondItem="pA4-Dd-5ue" secondAttribute="height" id="PE2-JM-bTB"/>
                             <constraint firstItem="wIq-Yv-7dW" firstAttribute="top" secondItem="Cra-U1-xf3" secondAttribute="bottom" constant="8" id="PYP-9L-9s6"/>
+                            <constraint firstItem="Syq-d4-OLX" firstAttribute="leading" secondItem="Ev6-6E-W7s" secondAttribute="leading" id="PmU-hf-mh7"/>
                             <constraint firstItem="ZZg-aW-uH6" firstAttribute="height" secondItem="pA4-Dd-5ue" secondAttribute="height" id="QDb-NG-WyN"/>
                             <constraint firstItem="EDc-tn-2rs" firstAttribute="leading" secondItem="afV-X0-e0k" secondAttribute="trailing" constant="8" id="R7J-aH-ocm"/>
                             <constraint firstItem="RVb-BE-9k7" firstAttribute="width" secondItem="pA4-Dd-5ue" secondAttribute="width" id="RI5-u9-YOp"/>
@@ -290,6 +298,7 @@
                             <constraint firstItem="2R7-2T-xlN" firstAttribute="top" secondItem="4Hb-35-XZ7" secondAttribute="bottom" constant="8" id="e87-l1-ujV"/>
                             <constraint firstItem="Cra-U1-xf3" firstAttribute="top" secondItem="gVw-Rf-08f" secondAttribute="bottom" constant="8" id="eRP-QL-FbA"/>
                             <constraint firstItem="oVu-2G-8kb" firstAttribute="width" secondItem="pA4-Dd-5ue" secondAttribute="width" id="fGe-TT-R7z"/>
+                            <constraint firstAttribute="bottom" secondItem="Syq-d4-OLX" secondAttribute="bottom" constant="20" symbolic="YES" id="hOa-hF-cLm"/>
                             <constraint firstItem="wIq-Yv-7dW" firstAttribute="height" secondItem="pA4-Dd-5ue" secondAttribute="height" id="hfd-Ss-JHj"/>
                             <constraint firstAttribute="trailingMargin" secondItem="20V-ja-Gi0" secondAttribute="trailing" constant="8" id="hie-tB-fg5"/>
                             <constraint firstItem="4Hb-35-XZ7" firstAttribute="width" secondItem="pA4-Dd-5ue" secondAttribute="width" id="hsF-UX-Z8s"/>
@@ -307,6 +316,7 @@
                             <constraint firstItem="yUf-WY-5PI" firstAttribute="height" secondItem="pA4-Dd-5ue" secondAttribute="height" id="oIQ-ld-Rad"/>
                             <constraint firstItem="pA4-Dd-5ue" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="8" id="oLU-qd-HeE"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="wIq-Yv-7dW" secondAttribute="bottom" constant="101" id="och-cg-dgp"/>
+                            <constraint firstItem="Syq-d4-OLX" firstAttribute="trailing" secondItem="Ev6-6E-W7s" secondAttribute="trailing" id="piy-1r-XwC"/>
                             <constraint firstItem="jn2-gO-0un" firstAttribute="top" secondItem="hCk-cH-TEu" secondAttribute="bottom" constant="8" id="q0D-1n-fcP"/>
                             <constraint firstItem="20V-ja-Gi0" firstAttribute="width" secondItem="pA4-Dd-5ue" secondAttribute="width" id="sCa-6b-CZx"/>
                             <constraint firstItem="4Hb-35-XZ7" firstAttribute="top" secondItem="jn2-gO-0un" secondAttribute="bottom" constant="8" id="scJ-Ko-ish"/>
@@ -327,6 +337,7 @@
                     </view>
                     <connections>
                         <outlet property="display" destination="Ev6-6E-W7s" id="sAB-d1-Lzi"/>
+                        <outlet property="showHistory" destination="Syq-d4-OLX" id="4qw-vY-D9s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

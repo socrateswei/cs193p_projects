@@ -11,6 +11,7 @@ import UIKit
 class calculatorViewController: UIViewController {
     @IBOutlet weak var display: UILabel!
     var firstTimeInput: Bool = true
+    @IBOutlet weak var showHistory: UITextView!
     
     @IBAction func appendDigit(sender: UIButton)
     {
@@ -49,7 +50,6 @@ class calculatorViewController: UIViewController {
             enter()
         }
         switch operation {
-            
         case "×": performOperation(multiply)
         case "+": performOperation({ (op1: Double, op2: Double) -> Double in return op1+op2})
         case "−": performOperation({(op1,op2) in return op2 - op1})
@@ -63,6 +63,7 @@ class calculatorViewController: UIViewController {
         default: break
             
         }
+        showHistory.text = showHistory.text! + " " + operation + " = " + display.text! + "\n"
     }
     
     @IBAction func reverseSign(sender: UIButton) {
@@ -86,6 +87,8 @@ class calculatorViewController: UIViewController {
     {
         if operandStack.count >= 2
         {
+            showHistory.text = showHistory.text! + String(operandStack[operandStack.count-2]) + " "
+            showHistory.text = showHistory.text! + String(operandStack[operandStack.count-1])
             displayValue = operation(operandStack.removeLast(), operandStack.removeLast())
             enter()
         }
@@ -99,6 +102,7 @@ class calculatorViewController: UIViewController {
     {
         if operandStack.count >= 1
         {
+            showHistory.text = showHistory.text! + String(operandStack[operandStack.count-1])
             displayValue = operation(operandStack.removeLast())
             enter()
         }
