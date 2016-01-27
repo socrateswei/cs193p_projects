@@ -15,6 +15,16 @@ class calculatorViewController: UIViewController {
     @IBAction func appendDigit(sender: UIButton)
     {
         let digit = sender.currentTitle!
+        if digit == "π"
+        {
+            if(!firstTimeInput)
+            {
+                enter()
+            }
+            displayValue = M_PI
+            enter()
+            return
+        }
         if (!firstTimeInput)
         {
             display.text = display.text! + digit
@@ -48,8 +58,27 @@ class calculatorViewController: UIViewController {
             //case "-":performOperation() { $1 - $1 }
         case "÷": performOperation() {$1 / $0}
         case "√": performOperation() {sqrt($0)}
+        case "sin": performOperation() {sin($0*M_PI/180)}
+        case "cos": performOperation() {cos($0*M_PI/180)}
         default: break
             
+        }
+    }
+    
+    @IBAction func reverseSign(sender: UIButton) {
+        if (display.text!.containsString("-"))
+        {
+            display.text = display.text!.stringByReplacingOccurrencesOfString("-", withString: "")
+        }
+        else
+        {
+            display.text = "-" + display.text!
+        }
+    }
+    @IBAction func removeLastDigit(sender: UIButton) {
+        if !firstTimeInput
+        {
+            display.text = String(display.text!.characters.dropLast())
         }
     }
     
