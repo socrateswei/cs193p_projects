@@ -8,12 +8,16 @@
 
 import Foundation
 
+var variableValues = [String: Double]()
+
 class CalculatorBrain {
     private enum Op: CustomStringConvertible
     {
         case Operand(Double)
         case UnaryOperation(String, Double -> Double)
         case BinaryOperation(String, (Double,Double) -> Double)
+        case NullaryOperation(String, () -> Double)
+        case Variable(String)
         
         var description: String {
             get {
@@ -24,6 +28,10 @@ class CalculatorBrain {
                     return "\(symbol)"
                 case .BinaryOperation(let symbol, _):
                     return "\(symbol)"
+                case .NullaryOperation(let symbol, _):
+                    return "\(symbol)"
+                case .Variable(let variable):
+                    return "\(variable)"
                 }
             }
         }
@@ -43,6 +51,7 @@ class CalculatorBrain {
         learnOp(Op.UnaryOperation("√", sqrt))
         learnOp(Op.UnaryOperation("sin") {sin($0*M_PI/180)})
         learnOp(Op.UnaryOperation("cos") {cos($0*M_PI/180)})
+        learnOp(Op.NullaryOperation("π", { M_PI }))
     }
     
     private func evaluate(ops: [Op]) -> (result: Double?, remainOps: [Op]) {
@@ -54,8 +63,10 @@ class CalculatorBrain {
                 return (operand, remainOps)
             case .UnaryOperation(_, let operation):
                 let operandEvaluate = evaluate(remainOps)
-                let operand = operandEvaluate.result
-                return (operation(operand!),operandEvaluate.remainOps)
+                if let operand = operandEvaluate.result {
+                    return (operation(operand),operandEvaluate.remainOps)
+
+                }
             case .BinaryOperation(_, let operation):
                 let operand1Evaluate = evaluate(remainOps)
                 if let operand1 = operand1Evaluate.result {
@@ -63,6 +74,12 @@ class CalculatorBrain {
                     if let operand2 = operand2Evaluate.result {
                         return (operation(operand1, operand2),operand2Evaluate.remainOps)
                     }
+                }
+            case .NullaryOperation(_, let operation):
+                return (operation(), remainOps)
+            case .Variable(let variable):
+                if let _ = variableValues[variable] {
+                    return (variableValues[variable], remainOps)
                 }
             }
         }
@@ -78,6 +95,10 @@ class CalculatorBrain {
     func pushOperand(operand: Double) -> Double? {
         opStack.append(Op.Operand(operand))
         return evaluate()
+    }
+    func pushOperand(symbol: String) -> Double? {
+        opStack.append(Op.Variable(symbol))
+        return 0
     }
 
     func performOperation(symbol: String) -> Double? {

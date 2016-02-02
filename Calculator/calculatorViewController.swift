@@ -10,26 +10,17 @@ import UIKit
 
 class calculatorViewController: UIViewController {
     @IBOutlet weak var display: UILabel!
-    var firstTimeInput: Bool = true
     @IBOutlet weak var showHistory: UITextView!
+
+    var firstTimeInput: Bool = true
     var brain = CalculatorBrain()
-    
     
     @IBAction func appendDigit(sender: UIButton)
     {
         let digit = sender.currentTitle!
-        if digit == "π"
-        {
-            if(!firstTimeInput)
-            {
-                enter()
-            }
-            displayValue = M_PI
-            enter()
-            return
-        }
         if (!firstTimeInput)
         {
+            if (digit == "0") && ((display.text == "0") || (display.text == "-0")) { return }
             display.text = display.text! + digit
         }
         else
@@ -56,7 +47,7 @@ class calculatorViewController: UIViewController {
         } else {
             displayValue = nil
         }
-        showHistory.text = showHistory.text! + brain.getHistory()! + "=" + String(displayValue!) + "\n"
+        //showHistory.text = showHistory.text! + brain.getHistory()! + "=" + String(displayValue!) + "\n"
     }
     
     @IBAction func reverseSign(sender: UIButton) {
@@ -70,7 +61,7 @@ class calculatorViewController: UIViewController {
         }
     }
     @IBAction func removeLastDigit(sender: UIButton) {
-        if !firstTimeInput
+        if !firstTimeInput && displayValue != 0
         {
             display.text = String(display.text!.characters.dropLast())
         }
@@ -84,8 +75,8 @@ class calculatorViewController: UIViewController {
     }
     
     @IBAction func enter() {
-        if let result = brain.pushOperand(displayValue!) {
-            displayValue = result
+        if displayValue != nil {
+            let _ = brain.pushOperand(displayValue!)
         } else {
             displayValue = nil
         }
@@ -97,14 +88,14 @@ class calculatorViewController: UIViewController {
             if let value = display.text {
                 return Double(value)
             } else {
-                return 0
+                return nil
             }
         }
         set {
             if let value = newValue {
                 display.text = "\(value)"
             } else {
-                display.text = String("0")
+                display.text = "error"
             }
             firstTimeInput = false
         }
