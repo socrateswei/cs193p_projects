@@ -18,6 +18,9 @@ class calculatorViewController: UIViewController {
     @IBAction func appendDigit(sender: UIButton)
     {
         let digit = sender.currentTitle!
+        if displayValue == nil {
+            displayValue = 0
+        }
         if (!firstTimeInput)
         {
             if (digit == "0") && ((display.text == "0") || (display.text == "-0")) { return }
@@ -37,6 +40,33 @@ class calculatorViewController: UIViewController {
             firstTimeInput = false
         }
     }
+    
+    @IBAction func getVariable(sender: UIButton) {
+        if !firstTimeInput {
+            enter()
+        }
+        if let result = brain.pushOperand(sender.currentTitle!) {
+            displayValue = result
+        } else {
+            displayValue = nil
+        }
+    }
+    
+    @IBAction func pushVariable(sender: UIButton) {
+        if let variable = sender.currentTitle {
+            let symbol = variable[variable.endIndex.predecessor()]
+            if displayValue != nil {
+                brain.variableValues["\(symbol)"] = displayValue
+                if let result = brain.evaluate() {
+                    displayValue = result
+                } else {
+                    displayValue = nil
+                }
+            }
+        }
+        firstTimeInput = true
+    }
+    
     @IBAction func operate(sender: UIButton) {
         let operation = sender.currentTitle!
         if !firstTimeInput {
@@ -61,7 +91,7 @@ class calculatorViewController: UIViewController {
         }
     }
     @IBAction func removeLastDigit(sender: UIButton) {
-        if !firstTimeInput && displayValue != 0
+        if !firstTimeInput && display.text != "0"
         {
             display.text = String(display.text!.characters.dropLast())
         }

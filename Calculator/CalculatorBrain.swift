@@ -8,7 +8,6 @@
 
 import Foundation
 
-var variableValues = [String: Double]()
 
 class CalculatorBrain {
     private enum Op: CustomStringConvertible
@@ -39,7 +38,8 @@ class CalculatorBrain {
     
     private var opStack = [Op]()
     private var knownOps = [String: Op]()
-    
+    var variableValues = [String: Double]()
+
     init() {
         func learnOp (op: Op) {
             knownOps[op.description] = op
@@ -110,6 +110,7 @@ class CalculatorBrain {
     
     func clean() {
         opStack.removeAll()
+        variableValues.removeAll()
     }
     
     func getHistory() -> String? {
