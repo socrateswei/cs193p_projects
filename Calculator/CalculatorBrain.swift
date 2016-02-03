@@ -98,7 +98,7 @@ class CalculatorBrain {
     }
     func pushOperand(symbol: String) -> Double? {
         opStack.append(Op.Variable(symbol))
-        return 0
+        return evaluate()
     }
 
     func performOperation(symbol: String) -> Double? {
