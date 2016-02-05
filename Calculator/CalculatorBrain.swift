@@ -85,7 +85,7 @@ class CalculatorBrain {
                 if let operand1 = operandEval1.result {
                     let operandEval2 = description(operandEval1.remainOps)
                     if let operand2 = operandEval2.result {
-                        return ("(\(operand2)) \(symbol) \(operand1)",operandEval2.remainOps)
+                        return ("(\(operand2) \(symbol) \(operand1))",operandEval2.remainOps)
                     }
                 }
             case .NullaryOperation(let symbol, _):
