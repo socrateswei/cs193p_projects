@@ -29,8 +29,8 @@ class CalculatorBrain {
                     return "\(symbol)"
                 case .NullaryOperation(let symbol, _):
                     return "\(symbol)"
-                case .Variable(let variable):
-                    return "\(variable)"
+                case .Variable(let symbol):
+                    return "\(symbol)"
                 }
             }
         }
@@ -51,7 +51,10 @@ class CalculatorBrain {
         learnOp(Op.UnaryOperation("√", sqrt))
         learnOp(Op.UnaryOperation("sin") {sin($0*M_PI/180)})
         learnOp(Op.UnaryOperation("cos") {cos($0*M_PI/180)})
+        learnOp(Op.UnaryOperation("tan") {tan($0*M_PI/180)})
         learnOp(Op.NullaryOperation("π", { M_PI }))
+        learnOp(Op.NullaryOperation("e", { M_E }))
+
     }
     
     private func evaluate(ops: [Op]) -> (result: Double?, remainOps: [Op]) {
@@ -77,10 +80,12 @@ class CalculatorBrain {
                 }
             case .NullaryOperation(_, let operation):
                 return (operation(), remainOps)
-            case .Variable(let variable):
-                if let _ = variableValues[variable] {
-                    return (variableValues[variable], remainOps)
+            case .Variable(let symbol):
+                if let _ = variableValues[symbol] {
+                    return (variableValues[symbol], remainOps)
                 }
+                print("variable is not set")
+                return (nil, remainOps)
             }
         }
         return (nil, ops)

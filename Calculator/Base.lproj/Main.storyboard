@@ -191,6 +191,9 @@
                                 <rect key="frame" x="138" y="320" width="102.5" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="e"/>
+                                <connections>
+                                    <action selector="operate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1g1-56-QJb"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gSq-kS-tde">
                                 <rect key="frame" x="249" y="320" width="102.5" height="41"/>
@@ -212,13 +215,16 @@
                                 <rect key="frame" x="469.5" y="320" width="102.5" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="tan"/>
+                                <connections>
+                                    <action selector="operate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xMV-hu-CZu"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="SFr-2P-xj1">
                                 <rect key="frame" x="469.5" y="124" width="102.5" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="→M"/>
                                 <connections>
-                                    <action selector="pushVariable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yoe-mU-0Zo"/>
+                                    <action selector="setVariable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cJC-71-0nv"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pOh-Vz-2jS">
@@ -226,7 +232,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="M"/>
                                 <connections>
-                                    <action selector="getVariable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tj4-EW-WPr"/>
+                                    <action selector="pushVariable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Lsy-fh-bAS"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LzT-Sy-qRx">

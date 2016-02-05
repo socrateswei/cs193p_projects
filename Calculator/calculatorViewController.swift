@@ -18,9 +18,6 @@ class calculatorViewController: UIViewController {
     @IBAction func appendDigit(sender: UIButton)
     {
         let digit = sender.currentTitle!
-        if displayValue == nil {
-            displayValue = 0
-        }
         if (!firstTimeInput)
         {
             if (digit == "0") && ((display.text == "0") || (display.text == "-0")) { return }
@@ -41,18 +38,20 @@ class calculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func getVariable(sender: UIButton) {
+    @IBAction func pushVariable(sender: UIButton) {
         if !firstTimeInput {
             enter()
+            print("enter")
         }
         if let result = brain.pushOperand(sender.currentTitle!) {
             displayValue = result
         } else {
             displayValue = nil
+            print("it's nil")
         }
     }
     
-    @IBAction func pushVariable(sender: UIButton) {
+    @IBAction func setVariable(sender: UIButton) {
         if let variable = sender.currentTitle {
             let symbol = variable[variable.endIndex.predecessor()]
             if displayValue != nil {
@@ -62,6 +61,8 @@ class calculatorViewController: UIViewController {
                 } else {
                     displayValue = nil
                 }
+            } else {
+                displayValue = nil
             }
         }
         firstTimeInput = true
@@ -105,29 +106,26 @@ class calculatorViewController: UIViewController {
     }
     
     @IBAction func enter() {
+        firstTimeInput = true
         if displayValue != nil {
-            let _ = brain.pushOperand(displayValue!)
+            let result = brain.pushOperand(displayValue!)
+            displayValue = result
         } else {
             displayValue = nil
         }
-        firstTimeInput = true
     }
     
     var displayValue: Double? {
         get {
-            if let value = display.text {
-                return Double(value)
-            } else {
-                return nil
-            }
+            return NSNumberFormatter().numberFromString(display.text!)?.doubleValue
         }
         set {
-            if let value = newValue {
-                display.text = "\(value)"
+            if newValue != nil {
+                display.text = String(newValue!)
             } else {
-                display.text = "error"
+                display.text = " "
             }
-            firstTimeInput = false
+            firstTimeInput = true
         }
     }
     
