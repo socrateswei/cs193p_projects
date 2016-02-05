@@ -10,7 +10,7 @@ import UIKit
 
 class calculatorViewController: UIViewController {
     @IBOutlet weak var display: UILabel!
-    @IBOutlet weak var showHistory: UITextView!
+    @IBOutlet weak var showHistory: UILabel!
 
     var firstTimeInput: Bool = true
     var brain = CalculatorBrain()
@@ -27,6 +27,7 @@ class calculatorViewController: UIViewController {
         {
             display.text = digit
             firstTimeInput = false
+            showHistory.text = brain.description
         }
     }
     
@@ -78,7 +79,6 @@ class calculatorViewController: UIViewController {
         } else {
             displayValue = nil
         }
-        //showHistory.text = showHistory.text! + brain.getHistory()! + "=" + String(displayValue!) + "\n"
     }
     
     @IBAction func reverseSign(sender: UIButton) {
@@ -102,7 +102,8 @@ class calculatorViewController: UIViewController {
     @IBAction func clear() {
         firstTimeInput = true
         brain.clean()
-        display.text = "0"
+        displayValue = nil
+        showHistory.text = ""
     }
     
     @IBAction func enter() {
@@ -126,6 +127,11 @@ class calculatorViewController: UIViewController {
                 display.text = " "
             }
             firstTimeInput = true
+            if brain.description != "" {
+                showHistory.text = brain.description + " ="
+            } else {
+                showHistory.text = brain.description + ""
+            }
         }
     }
     

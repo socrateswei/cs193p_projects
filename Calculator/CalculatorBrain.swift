@@ -57,6 +57,46 @@ class CalculatorBrain {
 
     }
     
+    var description: String {
+        get {
+            var (result, ops) = ("", opStack)
+            while ops.count > 0 {
+                var current: String?
+                (current, ops) = description(ops)
+                result = result == "" ? current! : "\(current!), \(result)"
+            }
+            return result
+        }
+    }
+    private func description (ops: [Op]) -> (result: String?, remainOps: [Op]) {
+        if !ops.isEmpty {
+            var remainOps = ops
+            let op = remainOps.removeLast()
+            switch op {
+            case .Operand(let operand):
+                return (String(format: "%g", operand) , remainOps)
+            case .UnaryOperation(let symbol,_):
+                let operandEval = description(remainOps)
+                if let operand = operandEval.result {
+                    return ("\(symbol) \(operand)", operandEval.remainOps)
+                }
+            case .BinaryOperation(let symbol,_):
+                let operandEval1 = description(remainOps)
+                if let operand1 = operandEval1.result {
+                    let operandEval2 = description(operandEval1.remainOps)
+                    if let operand2 = operandEval2.result {
+                        return ("(\(operand2)) \(symbol) \(operand1)",operandEval2.remainOps)
+                    }
+                }
+            case .NullaryOperation(let symbol, _):
+                return ("\(symbol)",remainOps)
+            case .Variable(let symbol):
+                return ("\(symbol)",remainOps)
+            }
+        }
+        return ("?", ops)
+    }
+
     private func evaluate(ops: [Op]) -> (result: Double?, remainOps: [Op]) {
         if !ops.isEmpty {
             var remainOps = ops
@@ -116,20 +156,5 @@ class CalculatorBrain {
     func clean() {
         opStack.removeAll()
         variableValues.removeAll()
-    }
-    
-    func getHistory() -> String? {
-        let count = opStack.count
-        let op = opStack[count-1]
-        switch op {
-        case .BinaryOperation(let symbol,_):
-            let history = opStack[count-2].description + " " + opStack[count-3].description + symbol + " = "
-            return history
-        case .UnaryOperation(let symbol,_):
-            let history = opStack[count-2].description + symbol + " = "
-            return history
-        default:
-            return nil
-        }
     }
 }
