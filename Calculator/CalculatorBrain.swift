@@ -78,7 +78,7 @@ class CalculatorBrain {
             case .UnaryOperation(let symbol,_):
                 let operandEval = description(remainOps)
                 if let operand = operandEval.result {
-                    return ("\(symbol) \(operand)", operandEval.remainOps)
+                    return ("\(symbol) (\(operand))", operandEval.remainOps)
                 }
             case .BinaryOperation(let symbol,_):
                 let operandEval1 = description(remainOps)
