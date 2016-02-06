@@ -34,6 +34,20 @@ class CalculatorBrain {
                 }
             }
         }
+        var precedence: Int {
+            get {
+                switch self {
+                case .BinaryOperation(let symbol,_):
+                    if symbol == "+" || symbol == "-" {
+                        return 1
+                    } else { // divide and multiply
+                        return 2
+                    }
+                default:
+                    return Int.max
+                }
+            }
+        }
     }
     
     private var opStack = [Op]()
@@ -62,39 +76,48 @@ class CalculatorBrain {
             var (result, ops) = ("", opStack)
             while ops.count > 0 {
                 var current: String?
-                (current, ops) = description(ops)
+                (current, ops, _) = description(ops)
                 result = result == "" ? current! : "\(current!), \(result)"
             }
             return result
         }
     }
-    private func description (ops: [Op]) -> (result: String?, remainOps: [Op]) {
+    private func description (ops: [Op]) -> (result: String?, remainOps: [Op], precedence: Int) {
         if !ops.isEmpty {
             var remainOps = ops
             let op = remainOps.removeLast()
             switch op {
             case .Operand(let operand):
-                return (String(format: "%g", operand) , remainOps)
+                return (String(format: "%g", operand) , remainOps, op.precedence)
             case .UnaryOperation(let symbol,_):
                 let operandEval = description(remainOps)
-                if let operand = operandEval.result {
-                    return ("\(symbol) (\(operand))", operandEval.remainOps)
+                if var operand = operandEval.result {
+                    if op.precedence > operandEval.precedence {
+                        operand = "(\(operand))"
+                    }
+                    return ("\(symbol) \(operand)", operandEval.remainOps, op.precedence)
                 }
             case .BinaryOperation(let symbol,_):
                 let operandEval1 = description(remainOps)
-                if let operand1 = operandEval1.result {
+                if var operand1 = operandEval1.result {
+                    if op.precedence > operandEval1.precedence {
+                       operand1 = "(\(operand1))"
+                    }
                     let operandEval2 = description(operandEval1.remainOps)
-                    if let operand2 = operandEval2.result {
-                        return ("(\(operand2) \(symbol) \(operand1))",operandEval2.remainOps)
+                    if var operand2 = operandEval2.result {
+                        if op.precedence > operandEval2.precedence {
+                            operand2 = "(\(operand2))"
+                        }
+                        return ("\(operand2) \(symbol) \(operand1)",operandEval2.remainOps, op.precedence)
                     }
                 }
             case .NullaryOperation(let symbol, _):
-                return ("\(symbol)",remainOps)
+                return ("\(symbol)",remainOps, op.precedence)
             case .Variable(let symbol):
-                return ("\(symbol)",remainOps)
+                return ("\(symbol)",remainOps, op.precedence)
             }
         }
-        return ("?", ops)
+        return ("?", ops, Int.max)
     }
 
     private func evaluate(ops: [Op]) -> (result: Double?, remainOps: [Op]) {
