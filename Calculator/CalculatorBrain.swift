@@ -168,6 +168,13 @@ class CalculatorBrain {
         opStack.append(Op.Variable(symbol))
         return evaluate()
     }
+    
+    func popOperand() -> Double? {
+        if !opStack.isEmpty {
+            opStack.removeLast()
+        }
+        return evaluate()
+    }
 
     func performOperation(symbol: String) -> Double? {
         if let operation = knownOps[symbol] {

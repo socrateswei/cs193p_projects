@@ -92,9 +92,20 @@ class calculatorViewController: UIViewController {
         }
     }
     @IBAction func removeLastDigit(sender: UIButton) {
-        if !firstTimeInput && display.text != "0"
+        if !firstTimeInput
         {
-            display.text = String(display.text!.characters.dropLast())
+            if display.text?.characters.count > 1 {
+                display.text = String(display.text!.characters.dropLast())
+            } else {
+                display.text = "0"
+                firstTimeInput = true
+            }
+        } else {
+            if let result = brain.popOperand() {
+                displayValue = result
+            } else {
+                displayValue = nil
+            }
         }
     }
 
