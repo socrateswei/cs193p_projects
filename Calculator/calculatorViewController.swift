@@ -135,7 +135,11 @@ class calculatorViewController: UIViewController {
             if newValue != nil {
                 display.text = String(newValue!)
             } else {
-                display.text = " "
+                if let error = brain.evaluateAndReportErrors() {
+                    display.text = error
+                } else {
+                    display.text = "0"
+                }
             }
             firstTimeInput = true
             if brain.description != "" {

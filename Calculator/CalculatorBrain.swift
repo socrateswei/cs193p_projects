@@ -52,6 +52,34 @@ class CalculatorBrain {
     
     private var opStack = [Op]()
     private var knownOps = [String: Op]()
+    enum errorCode
+    {
+        case DividedByZero
+        case SquareOfAnNeg
+        case NotEnoughOps
+        case VariableNotSet
+        case None
+        var code: String? {
+            get {
+                switch self {
+                case .DividedByZero:
+                    return "Divided by 0"
+                case .SquareOfAnNeg:
+                    return "SQRT Neg. Number"
+                case .NotEnoughOps:
+                    return "Not enough Ops"
+                case .VariableNotSet:
+                    return "M is not set"
+                default:
+                    return nil
+                }
+            }
+        }
+        
+        
+    }
+    private var error = errorCode.None
+
     var variableValues = [String: Double]()
 
     init() {
@@ -131,7 +159,6 @@ class CalculatorBrain {
                 let operandEvaluate = evaluate(remainOps)
                 if let operand = operandEvaluate.result {
                     return (operation(operand),operandEvaluate.remainOps)
-
                 }
             case .BinaryOperation(_, let operation):
                 let operand1Evaluate = evaluate(remainOps)
@@ -147,9 +174,10 @@ class CalculatorBrain {
                 if let _ = variableValues[symbol] {
                     return (variableValues[symbol], remainOps)
                 }
-                print("variable is not set")
+                error = .VariableNotSet
                 return (nil, remainOps)
             }
+            error = .NotEnoughOps
         }
         return (nil, ops)
     }
@@ -181,6 +209,12 @@ class CalculatorBrain {
             opStack.append(operation)
         }
         return evaluate()
+    }
+    
+    func evaluateAndReportErrors() -> String? {
+        error = .None
+        let (_,_) = evaluate(opStack)
+        return error.code
     }
     
     func clean() {
