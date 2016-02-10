@@ -150,6 +150,22 @@ class CalculatorViewController: UIViewController {
         }
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let destination = segue.destinationViewController as? UINavigationController {
+            let visiableDst = destination.visibleViewController
+            if let gvc = visiableDst as? GraphViewController {
+                if let identifier = segue.identifier {
+                    switch identifier {
+                    case "Show Graph" :
+                        gvc.title = "Hi"
+                        gvc.scale = 1.0
+                    default:
+                        break
+                    }
+                }
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

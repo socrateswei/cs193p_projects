@@ -10,6 +10,8 @@ import UIKit
 
 class GraphViewController: UIViewController {
 
+    var scale: CGFloat = 1.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
