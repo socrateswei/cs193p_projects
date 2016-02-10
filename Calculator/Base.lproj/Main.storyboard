@@ -236,6 +236,9 @@
                                 <rect key="frame" x="359" y="363" width="102.5" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="✎"/>
+                                <connections>
+                                    <segue destination="IMu-OS-RML" kind="showDetail" identifier="Show Graph" id="03M-kh-lvc"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OTr-fO-Vj5">
                                 <rect key="frame" x="359" y="314" width="102.5" height="41"/>
@@ -442,7 +445,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1173" y="339"/>
+            <point key="canvasLocation" x="1145" y="339"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="UUf-JM-oXb">
@@ -457,10 +460,10 @@
             </objects>
             <point key="canvasLocation" x="-380" y="339"/>
         </scene>
-        <!--View Controller-->
+        <!--Graph View Controller-->
         <scene sceneID="3Pq-nr-3VK">
             <objects>
-                <viewController id="Z9r-iD-huV" sceneMemberID="viewController">
+                <viewController id="Z9r-iD-huV" customClass="GraphViewController" customModule="Calculator" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2Et-RB-3WI"/>
                         <viewControllerLayoutGuide type="bottom" id="W15-1R-TvK"/>
@@ -469,7 +472,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="erj-xt-Wx5">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="erj-xt-Wx5" customClass="GraphView" customModule="Calculator" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -522,7 +525,10 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PE4-Mi-TRy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-380" y="1118"/>
+            <point key="canvasLocation" x="-360" y="1118"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="03M-kh-lvc"/>
+    </inferredMetricsTieBreakers>
 </document>
