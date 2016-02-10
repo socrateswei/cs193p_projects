@@ -104,11 +104,11 @@
 				E488F4E11C57D1BA00CC6FE7 /* AppDelegate.swift */,
 				E488F4E51C57D1BA00CC6FE7 /* Main.storyboard */,
 				E488F4E81C57D1BA00CC6FE7 /* Assets.xcassets */,
-				E405B9071C6B953E0047A212 /* AxesDrawer.swift */,
 				E405B9051C6B94F60047A212 /* CalculatorViewController.swift */,
 				E488F4EA1C57D1BA00CC6FE7 /* LaunchScreen.storyboard */,
 				E488F4ED1C57D1BA00CC6FE7 /* Info.plist */,
 				E488F5131C59280800CC6FE7 /* CalculatorBrain.swift */,
+				E405B9071C6B953E0047A212 /* AxesDrawer.swift */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
