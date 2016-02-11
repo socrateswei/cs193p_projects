@@ -52,7 +52,7 @@ class GraphView: UIView
         }
     }
     
-    private func resetOriginScale(gesture: UITapGestureRecognizer) {
+    func resetOriginScale(gesture: UITapGestureRecognizer) {
         if gesture.state == .Ended {
             newOrigin = origin
             scale = Constants.DefaultScale
