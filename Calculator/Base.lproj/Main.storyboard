@@ -475,6 +475,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="erj-xt-Wx5" customClass="GraphView" customModule="Calculator" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="gaB-x6-cai" appends="YES" id="990-il-YTy"/>
+                                    <outletCollection property="gestureRecognizers" destination="sgh-bV-lc5" appends="YES" id="Svt-f7-9ZW"/>
+                                    <outletCollection property="gestureRecognizers" destination="Y2o-iH-cx0" appends="YES" id="4ea-nu-Un9"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -486,8 +492,26 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="g3P-zJ-a1e"/>
+                    <connections>
+                        <outlet property="graphview" destination="erj-xt-Wx5" id="ViE-7r-KZG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dIF-nK-XpQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="gaB-x6-cai">
+                    <connections>
+                        <action selector="moveView:" destination="Z9r-iD-huV" id="P0R-ku-aoK"/>
+                    </connections>
+                </panGestureRecognizer>
+                <pinchGestureRecognizer id="sgh-bV-lc5">
+                    <connections>
+                        <action selector="scaleView:" destination="Z9r-iD-huV" id="yqx-SE-Per"/>
+                    </connections>
+                </pinchGestureRecognizer>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="Y2o-iH-cx0">
+                    <connections>
+                        <action selector="backToOriginal:" destination="Z9r-iD-huV" id="9zJ-Am-e8R"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="432" y="1118"/>
         </scene>

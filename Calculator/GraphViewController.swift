@@ -8,30 +8,43 @@
 
 import UIKit
 
-class GraphViewController: UIViewController {
+class GraphViewController: UIViewController, GraphViewDataSource {
 
     var scale: CGFloat = 1.0
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    @IBOutlet weak var graphview: GraphView! {
+        didSet {
+            graphview.dataSource = self
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    var shift: CGPoint = CGPointZero {
+        didSet {
+            updateUI()
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    private func updateUI() {
+        graphview?.setNeedsDisplay()
     }
-    */
-
+    
+    @IBAction func moveView(sender: UIPanGestureRecognizer) {
+        switch sender.state {
+        case .Ended:
+            shift = sender.translationInView(graphview)
+            sender.setTranslation(CGPointZero, inView: graphview)
+        default:
+            break
+        }
+    }
+    
+    @IBAction func scaleView(sender: UIPinchGestureRecognizer) {
+    }
+    
+    @IBAction func backToOriginal(sender: UITapGestureRecognizer) {
+    }
+    
+    func shiftForGraphView(sender: GraphView) -> CGPoint? {
+        return shift
+    }
+    
 }
