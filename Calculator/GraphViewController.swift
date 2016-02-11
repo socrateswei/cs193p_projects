@@ -18,6 +18,10 @@ class GraphViewController: UIViewController, GraphViewDataSource {
     
     @IBOutlet weak var graphview: GraphView! {
         didSet {
+            let doubleTapping = UITapGestureRecognizer(target: graphview, action: "resetOriginScale:")
+            doubleTapping.numberOfTapsRequired = 2
+            doubleTapping.numberOfTouchesRequired = 1
+            graphview.addGestureRecognizer(doubleTapping)
             graphview.dataSource = self
         }
     }

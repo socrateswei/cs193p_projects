@@ -16,7 +16,7 @@ protocol GraphViewDataSource: class {
 @IBDesignable
 class GraphView: UIView
 {
-    @IBInspectable var scale: CGFloat = 50.0 { didSet { setNeedsDisplay() } }
+    @IBInspectable var scale: CGFloat = Constants.DefaultScale { didSet { setNeedsDisplay() } }
     @IBInspectable var lineWidth: CGFloat = 3 { didSet { setNeedsDisplay() } }
     @IBInspectable var color: UIColor = UIColor.blackColor() { didSet { setNeedsDisplay() } }
 
@@ -27,8 +27,12 @@ class GraphView: UIView
             return convertPoint(center, fromView: superview)
         }
     }
+    private struct Constants {
+        static let DefaultScale: CGFloat = 10.0
+    }
     
     var newOrigin: CGPoint = CGPointZero
+    var reset: Bool = false
     
     private func updateOrigin() {
         if (newOrigin == CGPointZero) {
@@ -49,9 +53,21 @@ class GraphView: UIView
         }
     }
     
+    func resetOriginScale(gesture: UITapGestureRecognizer) {
+        if gesture.state == .Ended {
+            newOrigin = origin
+            scale = Constants.DefaultScale
+            reset = true
+        }
+    }
+    
     override func drawRect(rect: CGRect) {
-        updateOrigin()
-        updateScale()
+        if (!reset) {
+            updateOrigin()
+            updateScale()
+        } else {
+            reset = false
+        }
         AxesDrawer().drawAxesInRect(rect, origin: newOrigin, pointsPerUnit: scale)
         color.set()
         let path = UIBezierPath(arcCenter: origin, radius: CGFloat(30.0), startAngle: 0, endAngle: CGFloat(2*M_PI), clockwise: true)
