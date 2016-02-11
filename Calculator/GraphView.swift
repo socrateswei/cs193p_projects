@@ -23,7 +23,7 @@ class GraphView: UIView
 
     weak var dataSource: GraphViewDataSource?
     
-    var origin: CGPoint {
+    private var origin: CGPoint {
         get {
             return convertPoint(center, fromView: superview)
         }
@@ -32,8 +32,8 @@ class GraphView: UIView
         static let DefaultScale: CGFloat = 10.0
     }
     
-    var newOrigin: CGPoint = CGPointZero
-    var reset: Bool = false
+    private var newOrigin: CGPoint = CGPointZero
+    private var reset: Bool = false
     
     private func updateOrigin() {
         if (newOrigin == CGPointZero) {
@@ -52,7 +52,7 @@ class GraphView: UIView
         }
     }
     
-    func resetOriginScale(gesture: UITapGestureRecognizer) {
+    private func resetOriginScale(gesture: UITapGestureRecognizer) {
         if gesture.state == .Ended {
             newOrigin = origin
             scale = Constants.DefaultScale
@@ -78,9 +78,11 @@ class GraphView: UIView
         for var i = 0; i <= Int(bounds.size.width * contentScaleFactor); i++ {
             point.x = CGFloat(i) / contentScaleFactor
             if let y = dataSource?.y((point.x - newOrigin.x) / scale) {
-                point.y = newOrigin.y - y * scale
-                if (i==0) { path.moveToPoint(point) }
-                else { path.addLineToPoint(point) }
+                if y.isNormal || y.isZero {
+                    point.y = newOrigin.y - y * scale
+                    if (i==0) { path.moveToPoint(point) }
+                    else { path.addLineToPoint(point) }
+                }
             }
         }
         color.set()

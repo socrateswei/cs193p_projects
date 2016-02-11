@@ -10,7 +10,7 @@ import UIKit
 
 class GraphViewController: UIViewController, GraphViewDataSource {
 
-    var newScale: CGFloat = 1.0 {
+    private var newScale: CGFloat = 1.0 {
         didSet {
             updateUI()
         }
@@ -25,7 +25,7 @@ class GraphViewController: UIViewController, GraphViewDataSource {
             graphview.dataSource = self
         }
     }
-    var shift: CGPoint = CGPointZero {
+    private var shift: CGPoint = CGPointZero {
         didSet {
             updateUI()
         }
