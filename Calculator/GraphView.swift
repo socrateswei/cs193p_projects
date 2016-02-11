@@ -11,6 +11,7 @@ import UIKit
 protocol GraphViewDataSource: class {
     func shiftForGraphView(sender: GraphView) -> CGPoint?
     func scaleForGraphView(sender: GraphView) -> CGFloat?
+    func y(x: CGFloat) -> CGFloat?
 }
 
 @IBDesignable
@@ -43,13 +44,11 @@ class GraphView: UIView
             newOrigin.y = shift.y + newOrigin.y
         } else {
             newOrigin = origin
-            print("Origin = \(origin)")
         }
     }
     private func updateScale() {
         if let newScale = dataSource?.scaleForGraphView(self) {
-            scale *= newScale
-            print("newScale = \(scale)")
+            scale = newScale
         }
     }
     
@@ -62,15 +61,29 @@ class GraphView: UIView
     }
     
     override func drawRect(rect: CGRect) {
+        // Setting origin and scale
         if (!reset) {
-            updateOrigin()
             updateScale()
+            updateOrigin()
         } else {
             reset = false
         }
-        AxesDrawer().drawAxesInRect(rect, origin: newOrigin, pointsPerUnit: scale)
+
+        // Draw axes
+        AxesDrawer(contentScaleFactor: contentScaleFactor).drawAxesInRect(rect, origin: newOrigin, pointsPerUnit: scale)
+
+        // Draw data points
+        var point = CGPoint()
+        let path = UIBezierPath()
+        for var i = 0; i <= Int(bounds.size.width * contentScaleFactor); i++ {
+            point.x = CGFloat(i) / contentScaleFactor
+            if let y = dataSource?.y((point.x - newOrigin.x) / scale) {
+                point.y = newOrigin.y - y * scale
+                if (i==0) { path.moveToPoint(point) }
+                else { path.addLineToPoint(point) }
+            }
+        }
         color.set()
-        let path = UIBezierPath(arcCenter: origin, radius: CGFloat(30.0), startAngle: 0, endAngle: CGFloat(2*M_PI), clockwise: true)
         path.lineWidth = lineWidth
         path.stroke()
     }

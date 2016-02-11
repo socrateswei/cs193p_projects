@@ -207,7 +207,7 @@ class CalculatorBrain {
         }
     }
     func evaluate() -> Double? {
-        print("opStack = \(opStack)")
+        //print("opStack = \(opStack)")
         let (result, _) = evaluate(opStack)
         return result
     }

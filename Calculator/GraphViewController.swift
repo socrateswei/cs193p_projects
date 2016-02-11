@@ -10,7 +10,7 @@ import UIKit
 
 class GraphViewController: UIViewController, GraphViewDataSource {
 
-    var scale: CGFloat = 1.0 {
+    var newScale: CGFloat = 1.0 {
         didSet {
             updateUI()
         }
@@ -45,7 +45,8 @@ class GraphViewController: UIViewController, GraphViewDataSource {
     @IBAction func scaleView(sender: UIPinchGestureRecognizer) {
         print("pinch gesture")
         if sender.state == .Changed {
-            scale *= sender.scale
+            newScale *= sender.scale
+            shift = CGPointZero
             sender.scale = 1
         }
     }
@@ -54,7 +55,7 @@ class GraphViewController: UIViewController, GraphViewDataSource {
         return shift
     }
     func scaleForGraphView(sender: GraphView) -> CGFloat? {
-        return scale
+        return newScale
     }
     var brain = CalculatorBrain()
     typealias PropertyList = AnyObject
