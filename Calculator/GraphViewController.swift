@@ -73,11 +73,18 @@ class GraphViewController: UIViewController, GraphViewDataSource, UIPopoverPrese
     func y(x: CGFloat) -> CGFloat? {
         brain.variableValues["M"] = Double(x)
         if let y = brain.evaluate() {
+            statValue["Min"] = min(y,statValue["Min"]!)
+            statValue["Max"] = max(y,statValue["Max"]!)
+            statValue["Avg"] = statValue["Avg"]! + y
+            statValue["Np"] = statValue["Np"]! + 1
             return CGFloat(y)
         } else {
             return nil
         }
     }
+
+    var statValue: [String: Double] = ["Min": Double(Int.max), "Max": Double(Int.min), "Avg": Double(0.0), "Np": Double(0.0)]
+    
     private struct Statistic {
         static let SegueIdentifier = "Show Stat"
     }
@@ -89,7 +96,8 @@ class GraphViewController: UIViewController, GraphViewDataSource, UIPopoverPrese
                     if let ppc = svc.popoverPresentationController {
                         ppc.delegate = self
                     }
-                    svc.text = "max?"
+                    statValue["Avg"] = statValue["Avg"]! / statValue["Np"]!
+                    svc.text = statValue.description
                 }
             default:
                 break
