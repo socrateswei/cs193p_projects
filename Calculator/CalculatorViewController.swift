@@ -157,7 +157,7 @@ class CalculatorViewController: UIViewController {
                 if let identifier = segue.identifier {
                     switch identifier {
                     case "Show Graph" :
-                        gvc.title = brain.description
+                        gvc.title = brain.description == "" ? "Graph" : brain.description.componentsSeparatedByString(", ").last
                         gvc.program = brain.program
                     default:
                         break
