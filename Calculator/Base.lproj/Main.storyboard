@@ -498,7 +498,15 @@
                             <constraint firstItem="erj-xt-Wx5" firstAttribute="top" secondItem="2Et-RB-3WI" secondAttribute="bottom" id="OGW-sR-7l6"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="g3P-zJ-a1e"/>
+                    <navigationItem key="navigationItem" id="g3P-zJ-a1e">
+                        <barButtonItem key="rightBarButtonItem" title="Statistics" id="9kv-JV-oAc">
+                            <connections>
+                                <segue destination="DFV-LG-s9m" kind="popoverPresentation" identifier="Show Stat" popoverAnchorBarButtonItem="9kv-JV-oAc" id="VM9-EV-lo8">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="graphview" destination="erj-xt-Wx5" id="ViE-7r-KZG"/>
                     </connections>
@@ -516,6 +524,42 @@
                 </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="432" y="1118"/>
+        </scene>
+        <!--Statistic View Controller-->
+        <scene sceneID="wrb-VE-gBh">
+            <objects>
+                <viewController modalPresentationStyle="currentContext" id="DFV-LG-s9m" customClass="StatisticViewController" customModule="Calculator" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ws7-xB-zTZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="7FG-Ju-pvC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ngb-uu-EIM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qYU-qk-TUY">
+                                <rect key="frame" x="0.0" y="0.0" width="605" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qYU-qk-TUY" firstAttribute="top" secondItem="ngb-uu-EIM" secondAttribute="top" id="6CV-gp-uTB"/>
+                            <constraint firstItem="qYU-qk-TUY" firstAttribute="leading" secondItem="ngb-uu-EIM" secondAttribute="leading" id="Hvc-vb-5oi"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qYU-qk-TUY" secondAttribute="trailing" constant="-25" id="SWj-RU-hxM"/>
+                            <constraint firstItem="qYU-qk-TUY" firstAttribute="bottom" secondItem="7FG-Ju-pvC" secondAttribute="top" id="eKt-Jl-3LM"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="statisticView" destination="qYU-qk-TUY" id="c2z-rn-dlS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ifi-rT-nQN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1096" y="1118"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="iwh-Y7-MZU">
