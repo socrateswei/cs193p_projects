@@ -48,7 +48,7 @@ class GraphView: UIView
     }
     private func updateScale() {
         if let newScale = dataSource?.scaleForGraphView(self) {
-            scale = newScale
+            scale *= newScale
             print("newScale = \(scale)")
         }
     }
