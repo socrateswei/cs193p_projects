@@ -10,7 +10,11 @@ import UIKit
 
 class GraphViewController: UIViewController, GraphViewDataSource {
 
-    var scale: CGFloat = 1.0
+    var scale: CGFloat = 1.0 {
+        didSet {
+            updateUI()
+        }
+    }
     
     @IBOutlet weak var graphview: GraphView! {
         didSet {
@@ -28,23 +32,24 @@ class GraphViewController: UIViewController, GraphViewDataSource {
     }
     
     @IBAction func moveView(sender: UIPanGestureRecognizer) {
-        switch sender.state {
-        case .Ended:
+        if sender.state == .Ended {
             shift = sender.translationInView(graphview)
             sender.setTranslation(CGPointZero, inView: graphview)
-        default:
-            break
         }
     }
     
     @IBAction func scaleView(sender: UIPinchGestureRecognizer) {
-    }
-    
-    @IBAction func backToOriginal(sender: UITapGestureRecognizer) {
+        print("pinch gesture")
+        if sender.state == .Changed {
+            scale *= sender.scale
+            sender.scale = 1
+        }
     }
     
     func shiftForGraphView(sender: GraphView) -> CGPoint? {
         return shift
     }
-    
+    func scaleForGraphView(sender: GraphView) -> CGFloat? {
+        return scale
+    }
 }

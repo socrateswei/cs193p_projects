@@ -10,6 +10,7 @@ import UIKit
 
 protocol GraphViewDataSource: class {
     func shiftForGraphView(sender: GraphView) -> CGPoint?
+    func scaleForGraphView(sender: GraphView) -> CGFloat?
 }
 
 @IBDesignable
@@ -18,7 +19,7 @@ class GraphView: UIView
     @IBInspectable var scale: CGFloat = 50.0 { didSet { setNeedsDisplay() } }
     @IBInspectable var lineWidth: CGFloat = 3 { didSet { setNeedsDisplay() } }
     @IBInspectable var color: UIColor = UIColor.blackColor() { didSet { setNeedsDisplay() } }
-    
+
     weak var dataSource: GraphViewDataSource?
     
     var origin: CGPoint {
@@ -41,14 +42,20 @@ class GraphView: UIView
             print("Origin = \(origin)")
         }
     }
+    private func updateScale() {
+        if let newScale = dataSource?.scaleForGraphView(self) {
+            scale = newScale
+            print("newScale = \(scale)")
+        }
+    }
     
     override func drawRect(rect: CGRect) {
         updateOrigin()
+        updateScale()
         AxesDrawer().drawAxesInRect(rect, origin: newOrigin, pointsPerUnit: scale)
         color.set()
         let path = UIBezierPath(arcCenter: origin, radius: CGFloat(30.0), startAngle: 0, endAngle: CGFloat(2*M_PI), clockwise: true)
         path.lineWidth = lineWidth
         path.stroke()
-        
     }
 }

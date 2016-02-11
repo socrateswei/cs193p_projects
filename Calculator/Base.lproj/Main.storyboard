@@ -479,7 +479,6 @@
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="gaB-x6-cai" appends="YES" id="990-il-YTy"/>
                                     <outletCollection property="gestureRecognizers" destination="sgh-bV-lc5" appends="YES" id="Svt-f7-9ZW"/>
-                                    <outletCollection property="gestureRecognizers" destination="Y2o-iH-cx0" appends="YES" id="4ea-nu-Un9"/>
                                 </connections>
                             </view>
                         </subviews>
@@ -507,11 +506,6 @@
                         <action selector="scaleView:" destination="Z9r-iD-huV" id="yqx-SE-Per"/>
                     </connections>
                 </pinchGestureRecognizer>
-                <tapGestureRecognizer numberOfTapsRequired="2" id="Y2o-iH-cx0">
-                    <connections>
-                        <action selector="backToOriginal:" destination="Z9r-iD-huV" id="9zJ-Am-e8R"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="432" y="1118"/>
         </scene>
