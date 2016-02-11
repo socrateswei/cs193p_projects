@@ -36,14 +36,17 @@ class GraphViewController: UIViewController, GraphViewDataSource {
     }
     
     @IBAction func moveView(sender: UIPanGestureRecognizer) {
-        if sender.state == .Ended {
+        switch sender.state {
+        case .Changed: fallthrough
+        case .Ended:
             shift = sender.translationInView(graphview)
             sender.setTranslation(CGPointZero, inView: graphview)
+        default:
+            break
         }
     }
     
     @IBAction func scaleView(sender: UIPinchGestureRecognizer) {
-        print("pinch gesture")
         if sender.state == .Changed {
             newScale *= sender.scale
             shift = CGPointZero
