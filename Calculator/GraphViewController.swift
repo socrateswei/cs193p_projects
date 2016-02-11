@@ -48,7 +48,7 @@ class GraphViewController: UIViewController, GraphViewDataSource {
     
     @IBAction func scaleView(sender: UIPinchGestureRecognizer) {
         if sender.state == .Changed {
-            newScale *= sender.scale
+            newScale = sender.scale
             shift = CGPointZero
             sender.scale = 1
         }

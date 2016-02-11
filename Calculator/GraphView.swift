@@ -29,7 +29,7 @@ class GraphView: UIView
         }
     }
     private struct Constants {
-        static let DefaultScale: CGFloat = 10.0
+        static let DefaultScale: CGFloat = 20.0
     }
     
     private var newOrigin: CGPoint = CGPointZero
@@ -48,7 +48,7 @@ class GraphView: UIView
     }
     private func updateScale() {
         if let newScale = dataSource?.scaleForGraphView(self) {
-            scale = newScale
+            scale *= newScale
         }
     }
     
@@ -68,7 +68,7 @@ class GraphView: UIView
         } else {
             reset = false
         }
-
+        //print("scale = \(scale), orig = \(newOrigin)")
         // Draw axes
         AxesDrawer(contentScaleFactor: contentScaleFactor).drawAxesInRect(rect, origin: newOrigin, pointsPerUnit: scale)
 
