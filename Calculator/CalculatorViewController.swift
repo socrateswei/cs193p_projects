@@ -157,8 +157,8 @@ class CalculatorViewController: UIViewController {
                 if let identifier = segue.identifier {
                     switch identifier {
                     case "Show Graph" :
-                        gvc.title = "Hi"
-                        gvc.scale = 1.0
+                        gvc.title = brain.description
+                        gvc.program = brain.program
                     default:
                         break
                     }
